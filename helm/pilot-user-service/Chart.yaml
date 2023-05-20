@@ -1,5 +1,0 @@
-apiVersion: v2
-name: pilot-user-service
-description: A Helm chart for my Spring Boot application
-version: 1.0.0
-appVersion: 1.0.0
