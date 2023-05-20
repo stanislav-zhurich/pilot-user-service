@@ -2,11 +2,17 @@ plugins {
 	id 'java'
 	id 'org.springframework.boot' version '3.0.6'
 	id 'io.spring.dependency-management' version '1.1.0'
+	id "com.palantir.git-version" version "3.0.0"
 }
 
 group = 'com.stan.pilot.user'
-version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '20'
+version gitVersion()
+sourceCompatibility = '17'
+targetCompatibility = '17'
+
+tasks.named("bootBuildImage") {
+	imageName = "stanislavzhurich/${project.name}:${project.version}"
+}
 
 repositories {
 	mavenCentral()
@@ -18,14 +24,19 @@ ext {
 
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
-	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
-	implementation 'org.springframework.boot:spring-boot-starter-security'
+	//implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+	//implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'com.azure.spring:spring-cloud-azure-starter'
-	implementation 'com.azure.spring:spring-cloud-azure-starter-actuator'
-	implementation 'com.azure.spring:spring-cloud-azure-starter-keyvault'
-	implementation 'io.micrometer:micrometer-tracing-bridge-brave'
-	runtimeOnly 'io.micrometer:micrometer-registry-prometheus'
+	//implementation 'com.azure.spring:spring-cloud-azure-starter'
+	//implementation 'com.azure.spring:spring-cloud-azure-starter-actuator'
+	//implementation 'com.azure.spring:spring-cloud-azure-starter-keyvault'
+	//implementation 'io.micrometer:micrometer-tracing-bridge-brave'
+	//runtimeOnly 'io.micrometer:micrometer-registry-prometheus'
+	compileOnly 'org.projectlombok:lombok:1.18.26'
+	annotationProcessor 'org.projectlombok:lombok:1.18.26'
+	
+	testCompileOnly 'org.projectlombok:lombok:1.18.26'
+	testAnnotationProcessor 'org.projectlombok:lombok:1.18.26'
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 	testImplementation 'org.springframework.security:spring-security-test'
 }
