@@ -30,6 +30,7 @@ steps:
     tasks: 'bootJar'
     publishJUnitResults: false
     javaHomeOption: 'JDKVersion'
+    jdkVersionOption: '1.17'
     sonarQubeRunAnalysis: false
     spotBugsAnalysis: false
 - task: Gradle@3
@@ -40,6 +41,7 @@ steps:
     tasks: 'bootBuildImage'
     publishJUnitResults: false
     javaHomeOption: 'JDKVersion'
+    jdkVersionOption: '1.17'
     sonarQubeRunAnalysis: false
     spotBugsAnalysis: false
 
