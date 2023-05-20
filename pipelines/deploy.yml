@@ -11,6 +11,7 @@ pool:
 
 steps:
 - task: Gradle@3
+  displayName: Compile
   inputs:
     gradleWrapperFile: 'gradlew'
     workingDirectory: '$(System.DefaultWorkingDirectory)'
@@ -21,3 +22,24 @@ steps:
     sonarQubeRunAnalysis: false
     checkStyleRunAnalysis: false
     spotBugsAnalysis: false
+- task: Gradle@3
+  displayName: Create Jar
+  inputs:
+    gradleWrapperFile: 'gradlew'
+    workingDirectory: '$(System.DefaultWorkingDirectory)'
+    tasks: 'bootJar'
+    publishJUnitResults: false
+    javaHomeOption: 'JDKVersion'
+    sonarQubeRunAnalysis: false
+    spotBugsAnalysis: false
+- task: Gradle@3
+  displayName: Build Image
+  inputs:
+    gradleWrapperFile: 'gradlew'
+    workingDirectory: '$(System.DefaultWorkingDirectory)'
+    tasks: 'bootBuildImage'
+    publishJUnitResults: false
+    javaHomeOption: 'JDKVersion'
+    sonarQubeRunAnalysis: false
+    spotBugsAnalysis: false
+
