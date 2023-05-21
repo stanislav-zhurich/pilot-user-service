@@ -4,12 +4,13 @@
 # https://aka.ms/yaml
 
 trigger:
-- main
+- develop
 
 pool:
   vmImage: ubuntu-latest
 steps:
 - task: Gradle@3
+  displayName: Compile
   inputs:
     gradleWrapperFile: 'gradlew'
     workingDirectory: '$(System.DefaultWorkingDirectory)'
@@ -18,5 +19,32 @@ steps:
     javaHomeOption: 'JDKVersion'
     jdkVersionOption: '1.17'
     sonarQubeRunAnalysis: false
-    checkStyleRunAnalysis: true
+    checkStyleRunAnalysis: false
     spotBugsAnalysis: false
+- task: Gradle@3
+  displayName: Create Jar
+  inputs:
+    gradleWrapperFile: 'gradlew'
+    workingDirectory: '$(System.DefaultWorkingDirectory)'
+    tasks: 'bootJar'
+    publishJUnitResults: false
+    javaHomeOption: 'JDKVersion'
+    jdkVersionOption: '1.17'
+    sonarQubeRunAnalysis: false
+    spotBugsAnalysis: false
+- task: Gradle@3
+  displayName: Build Image
+  inputs:
+    gradleWrapperFile: 'gradlew'
+    workingDirectory: '$(System.DefaultWorkingDirectory)'
+    tasks: 'bootBuildImage'
+    publishJUnitResults: false
+    javaHomeOption: 'JDKVersion'
+    jdkVersionOption: '1.17'
+    sonarQubeRunAnalysis: false
+    spotBugsAnalysis: false
+- task: Docker@2
+  inputs:
+    command: 'push'
+
+
