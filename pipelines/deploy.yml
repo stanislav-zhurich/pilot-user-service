@@ -44,4 +44,8 @@ steps:
     jdkVersionOption: '1.17'
     sonarQubeRunAnalysis: false
     spotBugsAnalysis: false
+- task: Docker@2
+  inputs:
+    command: 'push'
+
 
