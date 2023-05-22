@@ -44,7 +44,7 @@ steps:
     sonarQubeRunAnalysis: false
     spotBugsAnalysis: false
 - bash: | 
-    docker_latest_image=$(docker --version)
+    docker_latest_image=$(docker images stanislavzhurich/pilot-user-service:*)
     echo "##vso[task.setvariable variable=DOCKER_IMAGE]$docker_latest_image"
 - bash: |
       echo "$(DOCKER_IMAGE)"
