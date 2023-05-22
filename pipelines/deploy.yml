@@ -43,6 +43,11 @@ steps:
     jdkVersionOption: '1.17'
     sonarQubeRunAnalysis: false
     spotBugsAnalysis: false
+- bash: |
+    "docker images stanislavzhurich" 
+    echo "##vso[task.setvariable variable=FOO]$FOO"
+- bash: |
+      echo "$(FOO)"
 - task: Docker@2
   inputs:
     command: 'push'
