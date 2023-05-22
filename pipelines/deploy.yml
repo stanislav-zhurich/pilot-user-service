@@ -44,12 +44,19 @@ steps:
     sonarQubeRunAnalysis: false
     spotBugsAnalysis: false
 - bash: | 
-    docker_latest_image=$(docker images stanislavzhurich/pilot-user-service:* --format='{{.Repository}}:{{.Tag}}' | head -1)
-    echo "##vso[task.setvariable variable=DOCKER_IMAGE]$docker_latest_image"
+    get_image_tag=$(docker images stanislavzhurich/pilot-user-service:* --format='{{.Tag}}' | head -1)
+    echo "##vso[task.setvariable variable=IMAGE_TAG]$get_image_tag"
 - bash: |
       echo "$(DOCKER_IMAGE)"
 - task: Docker@2
   inputs:
+    command: login
+    containerRegistry: DockerHubConnection
+- task: Docker@2
+  inputs:
+    container: 'stanislavzhurich/pilot-user-service'
+    tags: $(IMAGE_TAG)
     command: 'push'
+
 
 
