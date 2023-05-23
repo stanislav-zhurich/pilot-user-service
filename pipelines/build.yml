@@ -8,7 +8,7 @@ trigger:
 stages:
   - stage: 
     displayName: Build
-    pool: ubuntu-latest
+    pool: Default
     jobs:
       - job: 
         steps:
