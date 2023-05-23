@@ -8,7 +8,7 @@ trigger:
 stages:
   - stage: 
     displayName: Build
-    pool: Default
+    pool: Azure Pipelines
     jobs:
       - job: 
         steps:
