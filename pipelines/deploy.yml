@@ -1,23 +1,8 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
-
-trigger:
-- main
-
-pool:
-  vmImage: ubuntu-latest
+resources:
+  pipelines:
+  - pipeline: BuildUserService # Name of the pipeline resource.
+    source: "BuildUserService" # The name of the pipeline referenced by this pipeline resource.
+    trigger: true # Run app-ci pipeline when any run of security-lib-ci completes
 
 steps:
-- task: Gradle@3
-  inputs:
-    gradleWrapperFile: 'gradlew'
-    workingDirectory: '$(System.DefaultWorkingDirectory)'
-    tasks: 'build'
-    publishJUnitResults: false
-    javaHomeOption: 'JDKVersion'
-    jdkVersionOption: '1.17'
-    sonarQubeRunAnalysis: false
-    checkStyleRunAnalysis: true
-    spotBugsAnalysis: false
+- bash: echo "app-ci runs after security-lib-ci completes"
