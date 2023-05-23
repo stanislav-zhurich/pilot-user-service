@@ -1,6 +1,6 @@
 resources:
   pipelines:
-  - pipeline: DeployUserService # Name of the pipeline resource.
+  - pipeline: "Build User Service" # Name of the pipeline resource.
     source: "Build User Service" # The name of the pipeline referenced by this pipeline resource.
     trigger: true # Run app-ci pipeline when any run of security-lib-ci completes
 
