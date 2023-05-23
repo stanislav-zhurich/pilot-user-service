@@ -5,7 +5,7 @@
 
 trigger:
 - develop
-stages:
+stages: 
   - stage: 
     displayName: Build
     pool: Azure Pipelines
@@ -63,3 +63,13 @@ stages:
             repository: 'stanislavzhurich/pilot-user-service'
             command: 'push'
             tags: '$(IMAGE_TAG)'
+  - stage:
+    displayName: Deploy
+    pool: Azure Pipelines
+    jobs:
+      - job: 
+        steps:
+        - task: Bash@3
+          inputs:
+            targetType: 'inline'
+            script: 'echo ''Hello world'''
