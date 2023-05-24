@@ -48,7 +48,7 @@ stages:
             spotBugsAnalysis: false
         - bash: | 
             GetImageTag=$(docker images stanislavzhurich/pilot-user-service:* --format='{{.Tag}}' | head -1)
-            echo "##vso[task.setvariable variable=IMAGE_TAG;isOutput=true]$GetImageTag"
+            echo "##vso[task.setvariable variable=IMAGE_TAG]$GetImageTag"
           name: ImageTag
           displayName: Find Image Tag
         - bash: |
