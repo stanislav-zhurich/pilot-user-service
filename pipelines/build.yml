@@ -10,7 +10,8 @@ stages:
     displayName: Build
     pool: Azure Pipelines
     jobs:
-      - job: 
+      - job:
+        displayName: Build
         steps:
         - task: Gradle@3
           displayName: Compile
@@ -48,7 +49,7 @@ stages:
             spotBugsAnalysis: false
         - bash: | 
             get_image_tag=$(docker images stanislavzhurich/pilot-user-service:* --format='{{.Tag}}' | head -1)
-            echo "##vso[task.setvariable variable=IMAGE_TAG]$get_image_tag"
+            echo "##vso[task.setvariable variable=IMAGE_TAG;isOutput=true]$get_image_tag"
         - bash: |
             echo "$(IMAGE_TAG)"
         - task: CmdLine@2
@@ -75,7 +76,12 @@ stages:
             containerRegistry: 'DockerHubConnection'
             repository: 'stanislavzhurich/pilot-user-service'
             command: 'push'
-            tags: '$(IMAGE_TAG)'
+            tags: $(dependencies.Build.outputs['Build.DetermineResult.IMAGE_TAG'])
+        - task: CmdLine@2
+          displayName: Publish Helm Chart
+          inputs:
+            workingDirectory: '$(System.DefaultWorkingDirectory)'
+            script: helm push pilot-user-service-0.1.0.tgz  oci://registry-1.docker.io/stanislavzhurich
         
   - stage:
     condition: succeeded()
