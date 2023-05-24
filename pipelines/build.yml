@@ -6,7 +6,7 @@
 trigger:
 - develop
 stages: 
-  - stage: 
+  - stage: Build
     displayName: Build
     pool: Azure Pipelines
     jobs:
@@ -49,6 +49,7 @@ stages:
         - bash: | 
             GetImageTag=$(docker images stanislavzhurich/pilot-user-service:* --format='{{.Tag}}' | head -1)
             echo "##vso[task.setvariable variable=IMAGE_TAG;isOutput=true]$GetImageTag"
+            name: ImageTag
         - bash: |
             echo "$(IMAGE_TAG)"
         - task: CmdLine@2
@@ -62,7 +63,7 @@ stages:
     displayName: Publish
     pool: Azure Pipelines
     variables:
-      DOCKER_IMAGE_TAG: $[ stageDependencies.Build.BuildJob.outputs['IMAGE_TAG'] ]
+      DOCKER_IMAGE_TAG: $[ dependencies.Build.outputs['BuildJob.ImageTag.IMAGE_TAG'] ]
     jobs:
       - job: 
         steps:
