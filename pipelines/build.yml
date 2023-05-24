@@ -67,7 +67,7 @@ stages:
             containerRegistry: 'DockerHubConnection'
             repository: 'stanislavzhurich/pilot-user-service'
             command: 'push'
-            tags: $(DOCKER_IMAGE_TAG)
+            tags: $(IMAGE_TAG)
         - task: CmdLine@2
           displayName: Publish Helm Chart
           inputs:
