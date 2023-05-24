@@ -72,7 +72,7 @@ stages:
           displayName: Publish Helm Chart
           inputs:
             workingDirectory: '$(System.DefaultWorkingDirectory)'
-            script: helm push pilot-user-service-0.1.0.tgz  oci://registry-1.docker.io/stanislavzhurich        
+            script: helm push pilot-user-service-$(IMAGE_TAG).tgz  oci://registry-1.docker.io/stanislavzhurich        
   - stage:
     condition: succeeded()
     displayName: Deploy
