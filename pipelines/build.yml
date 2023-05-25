@@ -66,11 +66,7 @@ stages:
           inputs:
             workingDirectory: '$(System.DefaultWorkingDirectory)'
             script: helm package ./$(ServiceName)
-        - task: CmdLine@2
-          inputs:
-            script: |
-              echo "Structure of work folder of this pipeline:"
-              tree $(System.DefaultWorkingDirectory)
+        
         - task: CmdLine@2
           displayName: Publish Helm Chart
           inputs:
