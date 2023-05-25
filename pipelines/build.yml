@@ -68,7 +68,18 @@ stages:
             script: helm package ./$(ServiceName)
         - task: CmdLine@2
           inputs:
-            script: echo $(System.DefaultWorkingDirectory)
+            script: |
+              echo "Structure of work folder of this pipeline:"
+              tree $(Agent.WorkFolder)/1
+
+              echo "Build.ArtifactStagingDirectory:" 
+              echo "$(Build.ArtifactStagingDirectory)"
+
+              echo "Build.BinariesDirectory:" 
+              echo "$(Build.BinariesDirectory)"
+
+              echo "Build.SourcesDirectory:"
+              echo "$(Build.SourcesDirectory)"
         - task: CmdLine@2
           displayName: Publish Helm Chart
           inputs:
