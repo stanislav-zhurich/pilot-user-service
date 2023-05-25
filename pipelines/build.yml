@@ -75,7 +75,7 @@ stages:
           displayName: Publish Helm Chart
           inputs:
             workingDirectory: '$(System.DefaultWorkingDirectory)'
-            script: helm push $(ServiceName)-$(IMAGE_TAG)-tgz  oci://registry-1.docker.io/$(DockerAccountName)        
+            script: helm push $(ServiceName)-$(IMAGE_TAG).tgz  oci://registry-1.docker.io/$(DockerAccountName)        
         - task: Docker@2
           displayName: Push Image
           inputs:
