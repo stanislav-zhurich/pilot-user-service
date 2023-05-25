@@ -89,4 +89,3 @@ stages:
           inputs:
             targetType: 'inline'
             script: 'helm install -f values.yaml pilot-user-service ./pilot-user-service'
-        - 
