@@ -67,6 +67,9 @@ stages:
             workingDirectory: '$(System.DefaultWorkingDirectory)'
             script: helm package ./$(ServiceName)
         - task: CmdLine@2
+          inputs:
+            script: echo $(System.DefaultWorkingDirectory)
+        - task: CmdLine@2
           displayName: Publish Helm Chart
           inputs:
             workingDirectory: '$(System.DefaultWorkingDirectory)'
