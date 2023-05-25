@@ -88,4 +88,4 @@ stages:
         - task: Bash@3
           inputs:
             targetType: 'inline'
-            script: 'helm install -f values.yaml pilot-user-service ./pilot-user-service'
+            script: 'helm install -f ./pilot-user-service/values.yaml pilot-user-service ./pilot-user-service'
