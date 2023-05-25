@@ -77,7 +77,7 @@ stages:
           displayName: Publish Helm Chart
           inputs:
             workingDirectory: '$(System.DefaultWorkingDirectory)'
-            script: helm push $(ServiceName)-$(IMAGE_TAG).tgz  oci://registry-1.docker.io/$(DockerAccountName)        
+            script: helm push $(ServiceName)-tgz  oci://registry-1.docker.io/$(DockerAccountName)        
   - stage:
     condition: succeeded()
     displayName: Deploy
@@ -85,7 +85,12 @@ stages:
     jobs:
       - job: 
         steps:
-        - task: Bash@3
+        - task: HelmDeploy@0
           inputs:
-            targetType: 'inline'
-            script: 'helm install -f ./pilot-user-service/values.yaml pilot-user-service ./pilot-user-service'
+            connectionType: 'Kubernetes Service Connection'
+            kubernetesServiceConnection: 'DevKubernetesServiceEndpoint'
+            namespace: 'default'
+            command: 'install'
+            chartType: 'FilePath'
+            chartPath: './pilot-user-service'
+            valueFile: './pilot-user-service/values.yaml'
