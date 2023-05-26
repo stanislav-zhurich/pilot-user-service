@@ -89,7 +89,7 @@ stages:
         - task: HelmDeploy@0
           inputs:
             connectionType: 'Kubernetes Service Connection'
-            kubernetesServiceConnection: 'DevKubernetesServiceEndpoint'
+            kubernetesServiceConnection: 'develop_aks_service_endpoint'
             namespace: 'default'
             command: 'install'
             chartType: 'FilePath'
