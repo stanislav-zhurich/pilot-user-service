@@ -95,5 +95,5 @@ stages:
             chartType: 'FilePath'
             chartPath: './pilot-user-service'
             valueFile: './pilot-user-service/values-develop.yaml'
-            recreate: true
+            install: true
             arguments: '--atomic'
