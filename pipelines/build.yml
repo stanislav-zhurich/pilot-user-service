@@ -94,4 +94,4 @@ stages:
             command: 'install'
             chartType: 'FilePath'
             chartPath: './pilot-user-service'
-            valueFile: './pilot-user-service/values.yaml'
+            valueFile: './pilot-user-service/values-develop.yaml'
