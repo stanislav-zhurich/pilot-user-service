@@ -94,6 +94,9 @@ stages:
             command: 'upgrade'
             chartType: 'FilePath'
             chartPath: './pilot-user-service'
+            chartVersion: '$(IMAGE_TAG)'
+            releaseName: 'pilot-user-service'
             valueFile: './pilot-user-service/values-develop.yaml'
-            install: true
             arguments: '--atomic'
+
+
