@@ -17,7 +17,7 @@ public class UserController {
 
     private static Map<String, User> users = new HashMap<>();
     {
-        users.put("1", new User("1", "v1_stan@gmail.com"));
+        users.put("1", new User("1", "v1.0.10_stan@gmail.com"));
     }
 
     @GetMapping("/users")
