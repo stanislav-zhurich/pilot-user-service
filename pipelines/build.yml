@@ -91,7 +91,9 @@ stages:
             connectionType: 'Kubernetes Service Connection'
             kubernetesServiceConnection: 'develop_aks_service_endpoint'
             namespace: 'default'
-            command: 'install'
+            command: 'upgrade'
             chartType: 'FilePath'
             chartPath: './pilot-user-service'
-            valueFile: './pilot-user-service/values.yaml'
+            valueFile: './pilot-user-service/values-develop.yaml'
+            recreate: true
+            arguments: '--atomic'

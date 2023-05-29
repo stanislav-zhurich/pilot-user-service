@@ -4,20 +4,29 @@
 
 replicaCount: 1
 
+envValues:
+  - name: SPRING_PROFILES_ACTIVE
+    value: local
+
 image:
   repository: stanislavzhurich/pilot-user-service
   # Overrides the image tag whose default is the chart appVersion.
-  tag: 1.0.5
+  tag: 1.0.8
 
 service:
-  type: ClusterIP
-  port: 8080
+  type: LoadBalancer
+  port: 81
+  targetPort: 8080
+
 
 ingress:
-  enabled: true
+  enabled: false
   annotations:
     kubernetes.io/ingress.class: nginx
   hosts:
     - host: kubernetes.docker.internal
       paths:
         - path: /users
+        - path: /actuator/health/liveness
+        - path: /actuator/health/readiness
+        - path: /actuator
