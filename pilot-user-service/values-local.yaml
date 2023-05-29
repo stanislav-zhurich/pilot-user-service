@@ -10,8 +10,6 @@ envValues:
 
 image:
   repository: stanislavzhurich/pilot-user-service
-  # Overrides the image tag whose default is the chart appVersion.
-  tag: 1.0.8
 
 service:
   type: LoadBalancer
