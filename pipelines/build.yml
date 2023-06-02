@@ -93,7 +93,7 @@ stages:
             namespace: 'default'
             command: 'upgrade'
             chartType: 'FilePath'
-            chartPath: './pilot-user-service'
+            chartPath: 'oci://registry-1.docker.io/stanislavzhurich/pilot-user-service'
             chartVersion: '$(IMAGE_TAG)'
             releaseName: 'pilot-user-service'
             valueFile: './pilot-user-service/values-develop.yaml'
