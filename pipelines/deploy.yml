@@ -19,6 +19,9 @@ stages:
     jobs:
       - job: 
         steps:
+        - task: CmdLine@2
+          inputs:
+            script: 'echo Hello world $(IMAGE_TAG)'
         - task: HelmDeploy@0
           inputs:
             connectionType: 'Kubernetes Service Connection'
