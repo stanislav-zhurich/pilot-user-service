@@ -2,6 +2,15 @@
 # Start with a minimal pipeline that you can customize to build and deploy your code.
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
+trigger: none
+resources:
+  pipelines:
+  - pipeline: Build User Service # Name of the pipeline resource.
+    source: Build User Service # The name of the pipeline referenced by this pipeline resource.
+    trigger:
+      branches:
+        include:
+          - develop
 variables:
   - name: ServiceName
     value: pilot-user-service
