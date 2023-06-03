@@ -7,13 +7,13 @@ trigger:
 - develop
 resources:
   repositories:
-    - repository: pilot-infra
+    - repository: pilot-infrastructure
       endpoint: stanislavzhurich
       type: github
-      name: pilot-infra
+      name: pilot-infra/pilot-infrastructure
       ref: refs/heads/develop
 stages: 
-  - template: /pipelines/templates/build-service-template.yml@pilot-infra
+  - template: /pipelines/templates/build-service-template.yml@pilot-infrastructure
     parameters:
       ServiceName: pilot-user-service
 
