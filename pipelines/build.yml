@@ -11,7 +11,6 @@ resources:
       endpoint: stanislavzhurich
       type: github
       name: pilot-infrastructure
-      ref: refs/heads/develop
 stages: 
   - template: /pipelines/templates/build-service-template.yml@pilot-infrastructure
     parameters:
