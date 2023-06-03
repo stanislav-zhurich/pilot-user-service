@@ -10,7 +10,7 @@ resources:
     - repository: pilot-infrastructure
       endpoint: stanislavzhurich
       type: github
-      name: pilot-infrastructure
+      name: stanislav-zhurich/pilot-infrastructure
 stages: 
   - template: /pipelines/templates/build-service-template.yml@pilot-infrastructure
     parameters:
