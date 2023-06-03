@@ -8,9 +8,10 @@ trigger:
 resources:
   repositories:
     - repository: pilot-infra
-      endpoint: stanislav-zhurich
+      endpoint: stanislavzhurich
       type: github
-      name: stanislav-zhurich/pilot-infra
+      name: pilot-infra
+      ref: refs/heads/develop
 stages: 
   - template: /pipelines/templates/build-service-template.yml@pilot-infra
     parameters:
