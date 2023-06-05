@@ -1,38 +1,19 @@
 trigger: none
 resources:
-  pipelines:
-  - pipeline: "Build User Service" # Name of the pipeline resource.
-    source: Build User Service # The name of the pipeline referenced by this pipeline resource.
-    trigger:
-      branches:
-        include:
-          - develop
-variables:
-  - name: ServiceName
-    value: pilot-user-service
-  - name: DockerAccountName
-    value: stanislavzhurich
+    pipelines:
+    - pipeline: "Build User Service"
+      source: Build User Service # The name of the pipeline referenced by this pipeline resource.
+      trigger:
+        branches:
+          include:
+            - develop
+    repositories:
+      - repository: pilot-infrastructure
+        endpoint: stanislavzhurich
+        type: github
+        name: stanislav-zhurich/pilot-infrastructure
+        ref: refs/heads/develop
 stages: 
-  - stage: Deploy
-    displayName: Deploy
-    pool: Azure Pipelines
-    jobs:
-      - job: 
-        steps:
-        - task: CmdLine@2
-          inputs:
-            script: 'echo Hello world $(IMAGE_TAG)'
-        - task: HelmDeploy@0
-          inputs:
-            connectionType: 'Kubernetes Service Connection'
-            kubernetesServiceConnection: 'develop_aks_service_endpoint'
-            namespace: 'default'
-            command: 'upgrade'
-            chartType: 'FilePath'
-            chartPath: './pilot-user-service'
-            chartVersion: '$(IMAGE_TAG)'
-            releaseName: 'pilot-user-service'
-            valueFile: './pilot-user-service/values-develop.yaml'
-            arguments: '--atomic'
-
-
+  - template: /pipelines/templates/deploy-service-template.yml@pilot-infrastructure
+    parameters:
+      ServiceName: pilot-user-service
