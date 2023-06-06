@@ -1,2 +1,11 @@
-steps:
-- bash: echo "The test1 pipeline runs first"
+stages:
+    - stage: test 
+      jobs:
+          - job: 
+            steps:
+            - bash: |
+                fileExists=$(test -f "$(System.DefaultWorkingDirectory)/terraform")
+                echo "##vso[task.setvariable variable=RUN_TERRAFORM]$fileExists"
+            - task: CmdLine@2
+              inputs:
+                script: 'echo test $(RUN_TERRAFORM)'
