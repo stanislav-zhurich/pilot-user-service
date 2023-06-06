@@ -20,4 +20,4 @@ stages:
               workingDirectory: $(System.DefaultWorkingDirectory)
             - task: CmdLine@2
               inputs:
-                script: 'echo test $(fileExists1)'
+                script: 'echo test $(FileExists2)'
