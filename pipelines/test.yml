@@ -12,7 +12,7 @@ stages:
               inputs:
                 targetType: 'inline'
                 script: |
-                  $fileExists1 = Test-Path -Path "$(System.DefaultWorkingDirectory)/gradle"
+                  $fileExists1 = Test-Path -Path "$(System.DefaultWorkingDirectory)/terraform"
                   Write-Output "##vso[task.setvariable variable=FileExists2]$fileExists1"
             - bash: |
                 fileExists=$([ -d "/gradle" ])
@@ -20,4 +20,4 @@ stages:
               workingDirectory: $(System.DefaultWorkingDirectory)
             - task: CmdLine@2
               inputs:
-                script: 'echo test $(RUN_TERRAFORM)'
+                script: 'echo test $(fileExists1)'
