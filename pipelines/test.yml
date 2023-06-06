@@ -8,7 +8,7 @@ stages:
               inputs:
                 targetType: 'inline'
                 script: |
-                  $fileExists1 = Test-Path -Path "$(System.DefaultWorkingDirectory)/terraform"
+                  $fileExists1 = Test-Path -Path "$(System.DefaultWorkingDirectory)/terraform1"
                   Write-Output "##vso[task.setvariable variable=FileExists2]$fileExists1"
             - task: CmdLine@2
               condition: eq(variables['FileExists2'], 'True')
