@@ -3,5 +3,10 @@ server:
 management:
   endpoints:
     enabled-by-default: true
+azure:
+  cosmosdb:
+    uri: https://develop-pilot-account.documents.azure.com:443/
+    key: rP1mlJlusmz9hFrd6JRG3B9ttrKphADML8MXea57R6sWYmpmkE420jqXamtW2nuDwwH0Cj0AGP4dACDb5pX2LA==
+    database: user-container
 
 
