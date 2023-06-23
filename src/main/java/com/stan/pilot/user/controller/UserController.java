@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.stan.pilot.user.domain.User;
 import com.stan.pilot.user.service.UserService;
 
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
+
 @RestController
 public class UserController {
 
@@ -22,7 +25,7 @@ public class UserController {
     private UserService userService;
 
     @GetMapping("/users/{tenantId}")
-    public List<User> getUser(@PathVariable String tenantId) {
+    public Flux<User> getUser(@PathVariable String tenantId) {
         return userService.getUsers(tenantId);
     }
 }

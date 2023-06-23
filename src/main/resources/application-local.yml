@@ -1,10 +1,29 @@
 server:
-  port: 8080
+  port: 8081
 management:
   endpoints:
     enabled-by-default: true
-azure:
-  cosmosdb:
-    uri: https://develop-pilot-account.documents.azure.com:443/
-    key: rP1mlJlusmz9hFrd6JRG3B9ttrKphADML8MXea57R6sWYmpmkE420jqXamtW2nuDwwH0Cj0AGP4dACDb5pX2LA==
-    database: user-container
+spring:
+  cloud:
+    azure:
+      cosmos:
+        enabled: true
+        credential:
+          client-id: c4e9da1e-c8ac-4eb7-8f0e-800fafcc9dc0
+          client-secret: XBw8Q~Q4ItBdhZAPxBXIQGK-YQXSvV1gqtqfoc3m
+        endpoint: https://develop-pilot-account.documents.azure.com:443/
+        database: user-container
+        profile: 
+           tenant-id: 728ec391-9e63-400e-883f-f7fd4a75ac01
+      keyvault:
+        secret:
+          enabled: true
+          property-sources:
+            - name: develop-pilot-kv
+              endpoint: https://develop-pilot-kv.vault.azure.net/
+              credential:
+                client-id: c4e9da1e-c8ac-4eb7-8f0e-800fafcc9dc0
+                client-secret: XBw8Q~Q4ItBdhZAPxBXIQGK-YQXSvV1gqtqfoc3m
+              profile: 
+                tenant-id: 728ec391-9e63-400e-883f-f7fd4a75ac01
+            
