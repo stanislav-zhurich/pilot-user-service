@@ -25,7 +25,14 @@ public class UserController {
     private UserService userService;
 
     @GetMapping("/users/{tenantId}")
-    public Flux<User> getUser(@PathVariable String tenantId) {
+    public Flux<User> getUsers(@PathVariable String tenantId) {
         return userService.getUsers(tenantId);
     }
+
+    @GetMapping("/users/{tenantId}/{userId}")
+    public Mono<User> getUserById(@PathVariable("tenantId") String tenantId, @PathVariable String userId) {
+        return userService.findById(userId, tenantId);
+    }
+
+
 }
