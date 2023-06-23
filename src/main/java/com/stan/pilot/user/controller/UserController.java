@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.Set;
 
 import org.slf4j.Logger;
@@ -28,13 +29,13 @@ public class UserController {
     private UserService userService;
 
     @GetMapping("/users/{tenantId}")
-    public Flux<User> getUsers(@PathVariable String tenantId) {
+    public List<User> getUsers(@PathVariable String tenantId) {
         log.info("requesting users for tenant:" + tenantId);
         return userService.getUsers(tenantId);
     }
 
     @GetMapping("/users/{tenantId}/{userId}")
-    public Mono<User> getUserById(@PathVariable("tenantId") String tenantId, @PathVariable String userId) {
+    public Optional<User> getUserById(@PathVariable("tenantId") String tenantId, @PathVariable String userId) {
         log.info("requesting user by tenant:" + tenantId + " and id:" + userId);
         return userService.findById(userId, tenantId);
     }

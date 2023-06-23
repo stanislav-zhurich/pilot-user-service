@@ -9,6 +9,6 @@ import com.azure.spring.data.cosmos.repository.ReactiveCosmosRepository;
 import com.stan.pilot.user.domain.User;
 
 @Repository
-public interface UserRepository extends ReactiveCosmosRepository<User, String>{
+public interface UserRepository extends CosmosRepository<User, String>{
     
 }

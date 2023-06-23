@@ -2,6 +2,8 @@ package com.stan.pilot.user.service;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.util.Streamable;
@@ -21,11 +23,13 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
     
-    public Flux<User> getUsers(String tenantId){
-        return userRepository.findAll(new PartitionKey(tenantId));
+    public List<User> getUsers(String tenantId){
+        var iterable = userRepository.findAll(new PartitionKey(tenantId));
+        return StreamSupport.stream(iterable.spliterator(), false)
+                        .collect(Collectors.toList());
     }
 
-    public Mono<User> findById(String id, String tenantId){
+    public Optional<User> findById(String id, String tenantId){
         return userRepository.findById(id, new PartitionKey(tenantId));
     }
 }

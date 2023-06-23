@@ -6,7 +6,7 @@ plugins {
 }
 
 group = 'com.stan.pilot.user'
-version = "1.0.16"  
+version = "1.0.17"  
 
 sourceCompatibility = '17'
 targetCompatibility = '17'
@@ -29,7 +29,7 @@ ext {
 dependencies {
 
 	implementation 'org.springframework.boot:spring-boot-starter-actuator'
-    implementation 'org.springframework.boot:spring-boot-starter-webflux:3.1.0'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
 
    // implementation 'com.azure:azure-spring-data-cosmos:3.35.0'
     implementation 'com.azure.spring:spring-cloud-azure-starter-data-cosmos'
