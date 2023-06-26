@@ -21,7 +21,8 @@ ingress:
   enabled: true
   annotations:
     kubernetes.io/ingress.class: nginx
-  paths:
+  hosts:
+    - paths:
         - path: /users
         - path: /users/.*
         - path: /actuator/health/liveness
