@@ -24,7 +24,7 @@ ingress:
   hosts:
     - host: kubernetes.docker.internal
       paths:
-        - path: /users
+        - path: /users/*
         - path: /actuator/health/liveness
         - path: /actuator/health/readiness
         - path: /actuator
