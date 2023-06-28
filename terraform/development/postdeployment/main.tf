@@ -45,7 +45,7 @@ resource "kubernetes_manifest" "keda-userservice-topic-secret" {
     type = "Opaque"
     
     data = {
-      connection = data.azurerm_servicebus_topic_authorization_rule.user_topic_auth_rule.primary_connection_string
+      connection = base64encode(data.azurerm_servicebus_topic_authorization_rule.user_topic_auth_rule.primary_connection_string)
     }
   }
 }
