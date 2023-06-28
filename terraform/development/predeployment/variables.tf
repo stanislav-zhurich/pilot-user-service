@@ -48,3 +48,18 @@ variable "kv_user_service_sp_tenant" {
   type = string
   default = "user-service-sp-tenant"
 }
+
+variable "kv_user_topic_connection_string" {
+  type = string
+  default = "user-topic-connection-string"
+}
+
+variable "servicebus_user_topic_auth_rule" {
+  type = string
+  default = "user_topic_send_listen_auth_rule"
+}
+
+variable "servicebus_user_topic_name" {
+  type = string
+  default = "user_topic"
+}

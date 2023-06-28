@@ -4,7 +4,7 @@ terraform {
     storage_account_name = "infrastanstorageaccount"
     container_name       = "terraform"
     access_key           = "GVq0zEDpb2lfiZT7j8CZzKgV4pKedcftDwMJqumcOlPeBOXaltPJj2kmXmfXdlsZicabNUrz6Om1+ASt5Vfl/g=="
-    key                  = "userservice.terraform.tfstate"
+    key                  = "userservice.postdeployment.terraform.tfstate"
   }
   required_providers {
     azurerm = {

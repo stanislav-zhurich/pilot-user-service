@@ -71,3 +71,4 @@ override.tf.json
 .terraformrc
 terraform.rc
 
+terraform/development/postdeployment/.terraform.lock.hcl

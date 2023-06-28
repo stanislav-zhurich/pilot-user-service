@@ -18,3 +18,4 @@ stages:
     parameters:
       ServiceName: pilot-user-service
       RunTerraform: True
+      RunPostDeploymentTerraform: True

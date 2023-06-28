@@ -8,6 +8,28 @@ data "azurerm_key_vault" "key_vault" {
   resource_group_name = "${var.environment}_resource_group"
 }
 
+data "azurerm_kubernetes_cluster" "kubernetes_cluster" {
+  name                = "${var.environment}_cluster"
+  resource_group_name = "${var.environment}_resource_group"
+}
+
+data "azurerm_servicebus_topic_authorization_rule" "user_topic_auth_rule" {
+  name                = var.servicebus_user_topic_auth_rule
+  resource_group_name = "${var.environment}_resource_group"
+  namespace_name      = "${var.environment}pilotappservicebus"
+  topic_name          = var.servicebus_user_topic_name
+}
+
+provider "kubernetes" {
+    host = data.azurerm_kubernetes_cluster.kubernetes_cluster.kube_admin_config.0.host
+    client_certificate     = base64decode(data.azurerm_kubernetes_cluster.kubernetes_cluster.kube_admin_config.0.client_certificate)
+    client_key             = base64decode(data.azurerm_kubernetes_cluster.kubernetes_cluster.kube_admin_config.0.client_key)
+    cluster_ca_certificate = base64decode(data.azurerm_kubernetes_cluster.kubernetes_cluster.kube_admin_config.0.cluster_ca_certificate)
+    experiments {
+        manifest_resource = true
+    }
+}
+
 data "azuread_client_config" "current" {}
 
 resource "azurerm_cosmosdb_sql_database" "cosmosdb_database" {
@@ -92,8 +114,15 @@ resource "azurerm_key_vault_secret" "key_vault_service_principal_tenant" {
   key_vault_id = data.azurerm_key_vault.key_vault.id
 }
 
+resource "azurerm_key_vault_secret" "key_vault_user_topic_connection_string" {
+  name         = var.kv_user_topic_connection_string
+  value        = data.azurerm_servicebus_topic_authorization_rule.user_topic_auth_rule.primary_connection_string
+  key_vault_id = data.azurerm_key_vault.key_vault.id
+}
+
 resource "azurerm_role_assignment" "key_vault_service_reader_assignement" {
   scope                = data.azurerm_key_vault.key_vault.id
   role_definition_name = "Key Vault Administrator"
   principal_id         = azuread_service_principal.aad_service_sp.object_id
 }
+
