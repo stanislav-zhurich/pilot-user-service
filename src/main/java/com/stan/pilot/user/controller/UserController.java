@@ -11,6 +11,8 @@ import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -38,6 +40,12 @@ public class UserController {
     public Optional<User> getUserById(@PathVariable("tenantId") String tenantId, @PathVariable String userId) {
         log.info("requesting user by tenant:" + tenantId + " and id:" + userId);
         return userService.findById(userId, tenantId);
+    }
+
+    @PostMapping("/users/{tenantId}")
+    public User createUser(@PathVariable("tenantId") String tenantId, @RequestBody User user) {
+        log.info("creating user for tenant:" + tenantId);
+        return userService.create(tenantId, user);
     }
 
 

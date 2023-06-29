@@ -32,4 +32,9 @@ public class UserService {
     public Optional<User> findById(String id, String tenantId){
         return userRepository.findById(id, new PartitionKey(tenantId));
     }
+
+    public User create(String tenantid, User user){
+        user.setTenantId(tenantid);
+        return userRepository.save(user);
+    }
 }
