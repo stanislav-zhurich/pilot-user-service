@@ -64,7 +64,7 @@ resource "kubernetes_manifest" "keda-userservice-trigger-authentication" {
       secretTargetRef = [
         {
           key = "connection"
-          name = "user-topic-namespace-secret"
+          name = "pilot-user-service-topic-namespace-secret"
           parameter = "connection"
         }
       ]
