@@ -9,12 +9,12 @@ spring:
       cosmos:
         enabled: true
         credential:
-          client-id: 8cda47a8-c1b8-4740-9461-4c960c904c7a
-          client-secret: WA58Q~4dC~jgvJtYXSEkf5OgYtOiu04F2T7w8bpW
+          client-id: ${service_sp_id}
+          client-secret: ${service_sp_pswd}
         endpoint: https://develop-pilot-account.documents.azure.com:443/
         database: user-container
         profile: 
-           tenant-id: 728ec391-9e63-400e-883f-f7fd4a75ac01
+           tenant-id: ${service_sp_tenant_id}
       keyvault:
         secret:
           enabled: true
@@ -22,8 +22,8 @@ spring:
             - name: develop-pilot-kv
               endpoint: https://develop-pilot-kv.vault.azure.net/
               credential:
-                client-id: 8cda47a8-c1b8-4740-9461-4c960c904c7a
-                client-secret: WA58Q~4dC~jgvJtYXSEkf5OgYtOiu04F2T7w8bpW
+                client-id: ${service_sp_id}
+                client-secret: ${service_sp_pswd}
               profile: 
-                tenant-id: 728ec391-9e63-400e-883f-f7fd4a75ac01
+                tenant-id: ${service_sp_tenant_id}
             
