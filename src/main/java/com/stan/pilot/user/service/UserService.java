@@ -20,6 +20,10 @@ import reactor.core.publisher.Mono;
 @Service
 public class UserService {
 
+    public UserService(){
+        System.out.println("Hi");
+    }
+
     @Autowired
     private UserRepository userRepository;
     
