@@ -31,7 +31,7 @@ variable "container_name" {
 
 variable "aad_service_app_name" {
    type = string
-   default = "azuread_pilot_user_application"
+   default = "user-service-application"
 }
 
 variable "kv_user_service_sp_id" {
