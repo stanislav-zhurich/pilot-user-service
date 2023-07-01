@@ -6,7 +6,7 @@ plugins {
 }
 
 group = 'com.stan.pilot.user'
-version = "1.0.24"  
+version = "1.0.26"  
 
 sourceCompatibility = '17'
 targetCompatibility = '17'
