@@ -6,7 +6,7 @@ plugins {
 }
 
 group = 'com.stan.pilot.user'
-version = "1.0.28"  
+version = "1.0.29"  
 
 sourceCompatibility = '17'
 targetCompatibility = '17'
@@ -34,6 +34,9 @@ dependencies {
    // implementation 'com.azure:azure-spring-data-cosmos:3.35.0'
     implementation 'com.azure.spring:spring-cloud-azure-starter-data-cosmos'
     implementation 'com.azure.spring:spring-cloud-azure-starter-keyvault-secrets'
+
+	//implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.3'
+	//implementation 'org.springdoc:springdoc-openapi-starter-webmvc-api:2.1.0'
 
 	// https://mvnrepository.com/artifact/org.springframework.cloud/spring-cloud-dependencies
     //implementation platform('com.azure.spring:spring-cloud-azure-dependencies:5.2.0') 
