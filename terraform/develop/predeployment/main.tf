@@ -1,3 +1,7 @@
+data "azurerm_user_assigned_identity" "aks_user_identity" {
+  name                = "${var.environment}_aks_user_identity"
+  resource_group_name = "${var.environment}_resource_group"
+}
 data "azurerm_cosmosdb_account" "cosmosdb_account" {
     name                = "${var.environment}-pilot-account"
     resource_group_name = "${var.environment}_resource_group"
@@ -124,5 +128,32 @@ resource "azurerm_role_assignment" "key_vault_service_reader_assignement" {
   scope                = data.azurerm_key_vault.key_vault.id
   role_definition_name = "Key Vault Administrator"
   principal_id         = azuread_service_principal.aad_service_sp.object_id
+}
+
+resource "kubernetes_manifest" "aks_service_account" {
+   manifest = {
+    apiVersion = "v1"
+    kind       = "ServiceAccount"
+
+    metadata = {
+      annotations = {
+			"azure.workload.identity/client-id" = data.azurerm_user_assigned_identity.aks_user_identity.client_id
+      }
+      labels = {
+        "azure.workload.identity/use" = true
+      }
+      name = "pilotserviceaccount"
+      namespace = "default"
+    }
+  }
+}
+
+resource "azurerm_federated_identity_credential" "service_account_federated_identity" {
+  name                = "pilot_service_account_federated_identity"
+  resource_group_name = var.resource_group_name
+  audience            = ["api://AzureADTokenExchange"]
+  issuer              = data.azurerm_kubernetes_cluster.kubernetes_cluster.oidc_issuer_url
+  parent_id           = data.azurerm_user_assigned_identity.aks_user_identity.id
+  subject             = "system:serviceaccount:default:pilotserviceaccount"
 }
 
