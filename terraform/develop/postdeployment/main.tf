@@ -1,3 +1,7 @@
+data "azurerm_user_assigned_identity" "aks_user_identity" {
+  name                = "${var.environment}_aks_user_identity"
+  resource_group_name = "${var.environment}_resource_group"
+}
 data "azurerm_kubernetes_cluster" "kubernetes_cluster" {
   name                = "${var.environment}_cluster"
   resource_group_name = "${var.environment}_resource_group"
@@ -108,4 +112,31 @@ resource "kubernetes_manifest" "keda-userservice-scaled-object" {
       ]
     }
   }
+}
+
+resource "kubernetes_manifest" "aks_service_account" {
+   manifest = {
+    apiVersion = "v1"
+    kind       = "ServiceAccount"
+
+    metadata = {
+      annotations = {
+			"azure.workload.identity/client-id" = azurerm_user_assigned_identity.aks_user_identity.client_id
+      }
+      labels = {
+        "azure.workload.identity/use" = true
+      }
+      name = "pilotserviceaccount"
+      namespace = "default"
+    }
+  }
+}
+
+resource "azurerm_federated_identity_credential" "service_account_federated_identity" {
+  name                = "pilot_service_account_federated_identity"
+  resource_group_name = var.resource_group_name
+  audience            = ["api://AzureADTokenExchange"]
+  issuer              = data.azurerm_kubernetes_cluster.kubernetes_cluster.oidc_issuer_url
+  parent_id           = data.azurerm_user_assigned_identity.aks_user_identity.id
+  subject             = "system:serviceaccount:default:pilotserviceaccount"
 }
