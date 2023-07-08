@@ -1,25 +1,28 @@
+locals {
+  resource_group_name = "${var.environment}_resource_group"
+}
 data "azurerm_user_assigned_identity" "aks_user_identity" {
   name                = "${var.environment}_aks_user_identity"
-  resource_group_name = "${var.environment}_resource_group"
+  resource_group_name = local.resource_group_name
 }
 data "azurerm_cosmosdb_account" "cosmosdb_account" {
     name                = "${var.environment}-pilot-account"
-    resource_group_name = "${var.environment}_resource_group"
+    resource_group_name = local.resource_group_name
 }
 
 data "azurerm_key_vault" "key_vault" {
   name                = "${var.environment}-pilot-kv"
-  resource_group_name = "${var.environment}_resource_group"
+  resource_group_name = local.resource_group_name
 }
 
 data "azurerm_kubernetes_cluster" "kubernetes_cluster" {
   name                = "${var.environment}_cluster"
-  resource_group_name = "${var.environment}_resource_group"
+  resource_group_name = local.resource_group_name
 }
 
 data "azurerm_servicebus_topic_authorization_rule" "user_topic_auth_rule" {
   name                = var.servicebus_user_topic_auth_rule
-  resource_group_name = "${var.environment}_resource_group"
+  resource_group_name = local.resource_group_name
   namespace_name      = "${var.environment}pilotappservicebus"
   topic_name          = var.servicebus_user_topic_name
 }
@@ -150,7 +153,7 @@ resource "kubernetes_manifest" "aks_service_account" {
 
 resource "azurerm_federated_identity_credential" "service_account_federated_identity" {
   name                = "pilot_service_account_federated_identity"
-  resource_group_name = var.resource_group_name
+  resource_group_name = local.resource_group_name
   audience            = ["api://AzureADTokenExchange"]
   issuer              = data.azurerm_kubernetes_cluster.kubernetes_cluster.oidc_issuer_url
   parent_id           = data.azurerm_user_assigned_identity.aks_user_identity.id
