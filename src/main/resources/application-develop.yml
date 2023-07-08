@@ -23,8 +23,9 @@ spring:
               endpoint: https://develop-pilot-kv.vault.azure.net/
               credential:
                 managed-identity-enabled: true
-                client-id: 571cd73b-e5e9-4379-8470-48dc5da66ff2 #${service_sp_id}
-                #client-secret: ${service_sp_pswd}
+                #client-id: 571cd73b-e5e9-4379-8470-48dc5da66ff2 #${service_sp_id}
+                client-id: ${service_sp_id}
+                client-secret: ${service_sp_pswd}
               profile: 
                 tenant-id: ${service_sp_tenant_id}
             
