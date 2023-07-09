@@ -13,3 +13,7 @@ output "service_sp_pswd" {
   description = "Service SP Client Password"
 }
 
+output "aks_mi_client_id" {
+  value = data.azurerm_user_assigned_identity.aks_user_identity.client_id
+}
+

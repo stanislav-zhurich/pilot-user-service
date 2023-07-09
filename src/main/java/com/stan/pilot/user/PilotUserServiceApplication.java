@@ -18,6 +18,8 @@ public class PilotUserServiceApplication{
 		log.info("secret:" + secret);
 		String tenant = System.getenv("service_sp_tenant_id");
 		log.info("tenant:" + tenant);
+		String mi = System.getenv("aks_mi_client_id");
+		log.info("mi:" + mi);
 		SpringApplication.run(PilotUserServiceApplication.class, args);
 	} 
 }
