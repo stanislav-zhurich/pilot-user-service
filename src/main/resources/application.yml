@@ -1,3 +1,30 @@
+
+#spring:
+ # profiles:
+  #  active: local
+server:
+  port: 8080
+logging:
+  level:
+    com.azure: DEBUG
+management:
+  endpoints:
+    enabled-by-default: true
 spring:
-  profiles:
-    active: local
+  cloud:
+    azure:
+      keyvault:
+        secret:
+          enabled: true
+          property-sources:
+            - name: develop-pilot-kv
+              endpoint: https://develop-pilot-kv.vault.azure.net/
+              credential:
+                managed-identity-enabled: true
+                managed-identity-client-id: ${aks_mi_client_id}
+                client-id: ${aks_mi_client_id}
+                #client-id: ${service_sp_id}
+                #client-secret: ${service_sp_pswd}
+              profile: 
+                tenant-id: ${service_sp_tenant_id}
+            

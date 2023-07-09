@@ -1,5 +1,8 @@
 server:
   port: 8080
+logging:
+  level:
+    com.azure: DEBUG
 management:
   endpoints:
     enabled-by-default: true
