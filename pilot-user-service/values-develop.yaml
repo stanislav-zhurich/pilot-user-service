@@ -5,6 +5,9 @@
 replicaCount: 1
 serviceAccountName: pilotserviceaccount
 
+podAnnotations:
+  azure.workload.identity/inject-proxy-sidecar: "true"
+
 envValues:
   - name: SPRING_PROFILES_ACTIVE
     value: develop
