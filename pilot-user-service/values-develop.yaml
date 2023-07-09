@@ -7,6 +7,7 @@ serviceAccountName: pilotserviceaccount
 
 podAnnotations:
   azure.workload.identity/inject-proxy-sidecar: "true"
+  aadpodidbinding: develop_aks_user_identity
 
 envValues:
   - name: SPRING_PROFILES_ACTIVE

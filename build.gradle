@@ -42,6 +42,9 @@ dependencies {
     //implementation platform('com.azure.spring:spring-cloud-azure-dependencies:5.2.0') 
     //implementation platform('org.springframework.boot:spring-boot-dependencies:3.1.1') 
     //implementation platform('org.springframework.cloud:spring-cloud-dependencies:2022.0.3') 
+	implementation 'com.azure:azure-identity:1.9.1'
+	implementation 'com.microsoft.azure:msal4j:1.13.8'
+
 
 
 	compileOnly 'org.projectlombok:lombok:1.18.26'
