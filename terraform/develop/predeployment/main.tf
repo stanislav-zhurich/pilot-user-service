@@ -141,6 +141,7 @@ resource "kubernetes_manifest" "aks_service_account" {
     metadata = {
       annotations = {
 			"azure.workload.identity/client-id" = data.azurerm_user_assigned_identity.aks_user_identity.client_id
+      "azure.workload.identity/tenant-id" = data.azurerm_user_assigned_identity.aks_user_identity.tenant_id
       }
       labels = {
         "azure.workload.identity/use" = true
