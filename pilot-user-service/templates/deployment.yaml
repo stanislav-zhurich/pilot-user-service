@@ -17,7 +17,7 @@ spec:
       {{- end }}
       labels:
         {{- include "pilot-user-service.selectorLabels" . | nindent 8 }}
-        azure.workload.identity/use: {{ .Values.enableManagedIdentity }}
+        azure.workload.identity/use: "true"
     spec:
       serviceAccountName: {{ .Values.serviceAccountName }}
       containers:
