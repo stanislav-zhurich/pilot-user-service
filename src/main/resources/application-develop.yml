@@ -27,12 +27,4 @@ spring:
           property-sources:
             - name: develop-pilot-kv
               endpoint: https://develop-pilot-kv.vault.azure.net/
-              credential:
-                managed-identity-enabled: true
-                #managed-identity-client-id: ${AZURE_CLIENT_ID}
-                client-id: ${AZURE_CLIENT_ID}
-                #client-id: ${service_sp_id}
-                #client-secret: ${service_sp_pswd}
-              #profile: 
-                #tenant-id: ${service_sp_tenant_id}
             
