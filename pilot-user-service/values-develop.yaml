@@ -4,6 +4,7 @@
 
 replicaCount: 1
 serviceAccountName: pilotserviceaccount
+enableManagedIdentity: "true"
 
 #podAnnotations:
   #azure.workload.identity/inject-proxy-sidecar: "true"
