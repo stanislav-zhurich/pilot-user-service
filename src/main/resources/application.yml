@@ -10,16 +10,25 @@ logging:
 management:
   endpoints:
     enabled-by-default: true
+
 spring:
   cloud:
     azure:
       credential:
         managed-identity-enabled: true
-        client-id: ${aks_mi_client_id}
+        client-id: ${AZURE_CLIENT_ID}
       keyvault:
         secret:
           enabled: true
           property-sources:
             - name: develop-pilot-kv
               endpoint: https://develop-pilot-kv.vault.azure.net/
+              credential:
+                managed-identity-enabled: true
+                managed-identity-client-id: ${AZURE_CLIENT_ID}
+                #client-id: ${aks_mi_client_id}
+                #client-id: ${service_sp_id}
+                #client-secret: ${service_sp_pswd}
+              #profile: 
+                #tenant-id: ${service_sp_tenant_id}
             
