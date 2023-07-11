@@ -48,7 +48,6 @@ Selector labels
 {{- define "pilot-user-service.selectorLabels" -}}
 app.kubernetes.io/name: {{ include "pilot-user-service.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
-azure.workload.identity/use: {{ .Values.enableManagedIdentity }}
 {{- end }}
 
 {{/*
