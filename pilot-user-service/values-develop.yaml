@@ -5,8 +5,8 @@
 replicaCount: 1
 serviceAccountName: pilotserviceaccount
 
-podAnnotations:
-  azure.workload.identity/inject-proxy-sidecar: "true"
+#podAnnotations:
+  #azure.workload.identity/inject-proxy-sidecar: "true"
   #aadpodidbinding: develop_aks_user_identity
 
 envValues:
